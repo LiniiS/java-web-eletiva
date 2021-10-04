@@ -4,7 +4,7 @@
 
 #### Cenário apresentado
 Criar um sistema gerenciador de cadastros que contemplem um CRUD para: 
-- Clientes, 
+- Clientes
 - Frota
   - Carros
   - Motos
