@@ -47,12 +47,16 @@ public class NovoTerreno extends HttpServlet {
 		
 		TerrenoDao lst = new TerrenoDao();
 		lst.adiciona(t);
+	
+	/*	
+		usar o redirect após criar um novo cadastro pra evitar o reenvio a cada f5
 		
-
 		RequestDispatcher rd = request.getRequestDispatcher("/novoTerrenoCadastrado.jsp");
 		request.setAttribute("cotasTerreno", t.getCotasTerreno());
 		rd.forward(request, response);
 
+	*/
 	}
+	response.sendRedirect("terreno/novoTerrenoCadastrado.jsp");
 
 }
