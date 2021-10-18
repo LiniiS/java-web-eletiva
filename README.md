@@ -16,3 +16,5 @@ Criar um sistema gerenciador de cadastros que contemplem um CRUD para:
 - HTML/JS (validação client-side)
 - CSS/Bootstrap
 - Tomcat v9
+
+[Simulação do fluxo de navegação do sistema](https://marvelapp.com/prototype/77i8152)
