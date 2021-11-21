@@ -1,8 +1,9 @@
 package br.com.asantos.gerenciador.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import br.com.asantos.gerenciador.vo.Terreno;
 
@@ -12,10 +13,139 @@ import br.com.asantos.gerenciador.vo.Terreno;
  * possui ações típicas de um BD
  * 
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
-public class TerrenoDao {
+public class TerrenoDao extends BaseDao {
 
+	public ArrayList<Terreno> getTerrenos() throws Exception {
+		//conecta ao BD
+		open();
+		ArrayList<Terreno> lst = new ArrayList<>();
+		
+		Statement stm = getConn().createStatement();
+		
+		//query para retornar os dados do terreno
+		String sql = "SELECT trn_id, trn_longitude, trn_latitude, trn_cota_trn FROM terreno";
+		//devolve um  cnjto de resultados será capturado
+		ResultSet rs = stm.executeQuery(sql);
+		while(rs.next()) {
+			Terreno trn = new Terreno();
+			trn.setId(rs.getInt(1));
+			trn.setLongitude(rs.getString(2));
+			trn.setLatitude(rs.getString(3));
+			trn.setCotasTerreno(rs.getInt(4));
+			
+			lst.add(trn);
+		}
+		stm.close();
+		rs.close();
+		close();
+		return lst;
+	}
+//campo de pesquisa na página /listaTerrenos ~index.jsp	
+public ArrayList<Terreno> findTerrenos(String nome) throws Exception{
+	super.open();
+	ArrayList<Terreno> lst = new ArrayList<>();
+	String sql = "SELECT trn_id, trn_longitude, trn_latitude, trn_cota_trn FROM terreno where trn_cota_trn like ?";
+	PreparedStatement pstm = getConn().prepareStatement(sql);
+	//verificar se n vai quebrar aqui com o int sendo passado
+	//vai pegar o parametro que tá no campo de busca e pede-se a busca por cotas, um int
+	//adicionar a localidade ao VO pode ser mais interessante pra essa busca
+	//TODO mudar o campo para pesquisar por outro atributo
+	pstm.setString(1, nome + '%');
+	ResultSet rs = pstm.executeQuery();
+	while(rs.next()) {
+		Terreno trn = new Terreno();
+		trn.setId(rs.getInt(1));
+		trn.setLongitude(rs.getString(2));
+		trn.setLatitude(rs.getString(3));
+		trn.setCotasTerreno(rs.getInt(4));
+		
+		lst.add(trn);
+	}
+	pstm.close();
+	rs.close();
+	close();
+	return lst;
+}
+	
+public void newTerreno(Terreno terreno) throws Exception{
+	open();
+	String query = " INSERT INTO terreno (trn_alt_max, trn_alt_min, trn_latitude, trn_longitude, trn_cota_trn, trn_qtde_trn) values (?,?,?,?,?,?)";
+	PreparedStatement pstm = getConn().prepareStatement(query);
+	pstm.setString(1, terreno.getAlturaMax());
+	pstm.setString(2, terreno.getAlturaMin());
+	pstm.setString(3, terreno.getLatitude());
+	pstm.setString(4, terreno.getLongitude());
+	pstm.setInt(5, terreno.getCotasTerreno());
+	pstm.setInt(6, terreno.getQtdeTerreno());
+	
+	pstm.execute();
+	close();
+	
+}
+	
+public void editTerreno(Terreno terreno) throws Exception{
+	open();
+	//----------------------------------   1                 2            3               4                  5               6              7
+	String query = " UPDATE terreno set trn_alt_max=?, trn_alt_min=?, trn_latitude=?, trn_longitude=?, trn_cota_trn=?, trn_qtde_trn=? where trn_id=?";
+	PreparedStatement pstm = getConn().prepareStatement(query);
+	pstm.setString(1, terreno.getAlturaMax());
+	pstm.setString(2, terreno.getAlturaMin());
+	pstm.setString(3, terreno.getLatitude());
+	pstm.setString(4, terreno.getLongitude());
+	pstm.setInt(5, terreno.getCotasTerreno());
+	pstm.setInt(6, terreno.getQtdeTerreno());
+	pstm.setInt(7, terreno.getId());
+	pstm.execute();
+	
+	close();
+}
+	
+public void deleteTerreno(Terreno terreno) throws Exception{
+	open();
+	String query = "DELETE FROM terreno WHERE trn_id=?";
+	PreparedStatement pstm = getConn().prepareStatement(query);
+	pstm.setInt(1, terreno.getId());
+	pstm.execute();
+	pstm.close();
+	close();
+}
+
+public Terreno findByIdTerreno(int id) throws Exception{
+	super.open();
+	String sql = "SELECT trn_id, trn_longitude, trn_latitude, trn_cota_trn, trn_alt_max, trn_alt_min, trn_qtde_trn FROM terreno where trn_id=?";
+	PreparedStatement pstm = getConn().prepareStatement(sql);
+	pstm.setInt(1, id);
+	
+	ResultSet rs = pstm.executeQuery();
+	Terreno terreno = new Terreno();
+	while(rs.next()) {
+		terreno.setId(Integer.parseInt(rs.getString(1)));
+		terreno.setLongitude(rs.getString(2));
+		terreno.setLatitude(rs.getString(3));
+		terreno.setCotasTerreno(Integer.parseInt(rs.getString(4)));
+		terreno.setAlturaMax(rs.getString(5));
+		terreno.setAlturaMin(rs.getString(6));
+		terreno.setQtdeTerreno(Integer.parseInt(rs.getString(7)));
+	}
+	rs.close();
+	return terreno;
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}	
+	/*
 	private static List<Terreno> lista = new ArrayList<>();
 	private static Integer id = 1;
 
@@ -88,5 +218,5 @@ public class TerrenoDao {
 
 		return null;
 	}
+*/
 
-}

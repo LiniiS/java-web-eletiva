@@ -15,7 +15,7 @@ import br.com.asantos.gerenciador.vo.Cliente;
  * as alterações dos dados já
  * cadastrados serão mapeadas por este servlet
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/alteraCliente")
 public class AlteraCliente extends HttpServlet {
@@ -45,37 +45,35 @@ public class AlteraCliente extends HttpServlet {
 		//o campo de ID no form de alteração só funcionou ao se manter hidden
 		Integer id = Integer.valueOf(clientId);
 
-		System.out.println(id);
 		/*
 		  tratar o parâmetro da Data de Nascimento que vem como String da requisição
 		  parseando pra Date o Date do java util tá obsoleto, causou alguns conflitos e
 		  por enqto vai ser tratado como String ao longo do projeto
 		 */
-
-		// try & throw ~parsing
-//		Date dataNascimento = null;
-//		try {
-//			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//			dataNascimento = sdf.parse(dtNascimento);
-//		} catch (ParseException e) {
-//			throw new ServletException(e);
-//		}
-
+		Cliente c = new Cliente();
 		ClienteDao clienteDao = new ClienteDao();
-		//a lógica sera diferente pois a classe ClienteDao simula o banco de dados
-		Cliente c = clienteDao.buscaClientePorId(id);
+		
+		try {
+			c = clienteDao.findByIdCliente(id);
 			
-		c.setNome(nome);
-		c.setSobrenome(sobrenome);
-		c.setEmail(email);
-		c.setTelefone(telefone);
-		c.setDtNascimento(dtNascimento);
-		c.setLogradouro(logradouro);
-		c.setComplemento(complemento);
-		c.setBairro(bairro);
-		c.setCidade(cidade);
-		c.setEstado(estado);
-		c.setCEP(cep);
+			c.setNome(nome);
+			c.setSobrenome(sobrenome);
+			c.setEmail(email);
+			c.setTelefone(telefone);
+			c.setDtNascimento(dtNascimento);
+			c.setLogradouro(logradouro);
+			c.setComplemento(complemento);
+			c.setBairro(bairro);
+			c.setCidade(cidade);
+			c.setEstado(estado);
+			c.setCEP(cep);
+			
+			clienteDao.editCliente(c);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
 
 		System.out.println(c.getNome());
 		/*

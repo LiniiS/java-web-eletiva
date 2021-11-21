@@ -68,19 +68,25 @@
 				<form action="/gerenciador/produtos" method="POST"
 					class="needs-validation" novalidate>
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-4">
 							<label for="nome">Produto</label> <input type="text"
 								class="form-control" id="produto" data-tipo="produto"
 								placeholder="Bergamota" name="produto" required>
 							<div class="invalid-feedback">Informe o nome do produto</div>
 						</div>
-						<div class="form-group col-md-6">
-							<label for="sobrenome">Código do Produto</label> <input
+						<div class="form-group col-md-4">
+							<label for="codigo">Código do Produto</label> <input
 								type="text" class="form-control" id="codigo" name="codigo"
 								pattern="([A-Z]{3}[\d]{4})" placeholder="COD7568" required>
 							<div class="invalid-feedback">
 								Informe um código <small>(exemplo: ABC1234)</small>
 							</div>
+						</div>
+						<div class="form-group col-md-4">
+							<label for="preco">Preço</label> <input type="text"
+								class="form-control" id="preco" data-tipo="preco"
+								name="preco" required>
+							<div class="invalid-feedback">Informe o preço do produto</div>
 						</div>
 					</div>
 
@@ -142,7 +148,10 @@
 		}, false);
 	})();
 </script>
-<script type="module" src="js/app.js"></script>
+<!-- simple mask money: mascara pra testar o uso de máscaras -->
+<script src="https://github.com/codermarcos/simple-mask-money/releases/download/v3.0.0/simple-mask-money.js"></script>
+<script type="module" src="../js/app.js"></script>
+
 
 </html>
 

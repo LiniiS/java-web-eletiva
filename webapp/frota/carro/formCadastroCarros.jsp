@@ -102,7 +102,7 @@
 						<div class="form-group col-md-4">
 							<label for="portas"> Quantidade de Portas</label> <input
 								type="text" class="form-control" id="portas" data-tipo="portas"
-								pattern="[0-9]{1,2}" placeholder="2" required name="ortasCarro">
+								pattern="[0-9]{1,2}" placeholder="2" required name="portasCarro">
 							<div class="invalid-feedback">
 								Informe uma quantidade válida de portas
 							</div>

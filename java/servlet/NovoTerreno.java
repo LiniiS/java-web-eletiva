@@ -2,7 +2,6 @@ package br.com.asantos.gerenciador.servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,7 @@ import br.com.asantos.gerenciador.vo.Terreno;
  * Servlet implementation class NovoTerreno
  * apresenta o formulario para cadastro
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/terrenos")
 public class NovoTerreno extends HttpServlet {
@@ -45,18 +44,20 @@ public class NovoTerreno extends HttpServlet {
 		t.setCotasTerreno(Integer.parseInt(cotasTerreno));
 		t.setQtdeTerreno(Integer.parseInt(qtdeTerreno));
 		
-		TerrenoDao lst = new TerrenoDao();
-		lst.adiciona(t);
-	
-	/*	
-		usar o redirect após criar um novo cadastro pra evitar o reenvio a cada f5
+		TerrenoDao trnDao = new TerrenoDao();
+		try {
+			trnDao.newTerreno(t);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/novoTerrenoCadastrado.jsp");
-		request.setAttribute("cotasTerreno", t.getCotasTerreno());
-		rd.forward(request, response);
 
-	*/
+//		RequestDispatcher rd = request.getRequestDispatcher("/novoTerrenoCadastrado.jsp");
+//		request.setAttribute("cotasTerreno", t.getCotasTerreno());
+//		rd.forward(request, response);
+		
+		response.sendRedirect("terreno/novoTerrenoCadastrado.jsp");
+
 	}
-	response.sendRedirect("terreno/novoTerrenoCadastrado.jsp");
 
 }

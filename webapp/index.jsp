@@ -90,6 +90,16 @@
 						diversos</figcaption>
 				</figure>
 			</div>
+			
+			<div class="card mb-5 shadow-sm p-3 mb-5 bg-white rounded">
+				<figure class="figure">
+					<img src="./img/img-categorias.jpg"
+						class="figure-img img-fluid rounded"
+						alt="Visão superior do interior da seção de frutas e legumes de um mercado com pessoas entre as bancas de produtos.">
+					<figcaption class="figure-caption text-center">Categorias dos
+						diversos Produtos</figcaption>
+				</figure>
+			</div>
 
 		</section>
 

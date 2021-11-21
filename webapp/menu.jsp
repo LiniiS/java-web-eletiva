@@ -101,6 +101,19 @@
 							class="col-sm-12 col-md-8 btn btn-cor-especial">Entrar</a>
 					</div>
 				</div>
+				<!-- categorias de produtos -->
+				<div class="card">
+					<img src="./img/img-categorias.jpg" class="card-img-top"
+						alt="Visão superior do interior da seção de frutas e legumes de um mercado com pessoas entre as bancas de produtos.">
+					<div class="card-body">
+						<h5 class="card-title">Categorias</h5>
+						<p class="card-text">Cadastro de Categorias de Produtos</p>
+					</div>
+					<div class="card-footer">
+						<a href="/gerenciador/listaCategorias"
+							class="col-sm-12 col-md-8 btn btn-cor-especial">Entrar</a>
+					</div>
+				</div>
 			</div>
 		</section>
 	</main>

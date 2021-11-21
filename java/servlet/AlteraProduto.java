@@ -1,6 +1,8 @@
 package br.com.asantos.gerenciador.servlet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,19 +32,33 @@ public class AlteraProduto extends HttpServlet {
 		//leitura
 		String nomeProduto = request.getParameter("produto");
 		String codigoProduto = request.getParameter("codigo");
+		String precoProduto = request.getParameter("preco");
 		
-		String prdId = request.getParameter("id");
-		//novamente está dadno erro aqui ao salvar as alterações
-		//verificar asap
+		String prdId = request.getParameter("cod");
+		
 		Integer id = Integer.valueOf(prdId);
 
 		//busca na lista qual é o objeto daquele id pra exibir e repopular onde for necessário
+		Produto prd = new Produto();
 		ProdutoDao produtoDao = new ProdutoDao();
-		Produto p = produtoDao.buscaProdutoPorId(id);
+		try {
+			prd = produtoDao.findByIdProduto(id);
+			prd.setId(id);
+			prd.setNomeProduto(nomeProduto);
+			prd.setCodigoProduto(codigoProduto);
+			prd.setPrecoProduto(new BigDecimal(precoProduto));
+			
+			produtoDao.editProduto(prd);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
 		
 		//população
-		p.setNomeProduto(nomeProduto);
-		p.setCodigoProduto(codigoProduto);
+	//	p.setNomeProduto(nomeProduto);
+	//	p.setCodigoProduto(codigoProduto);
+	//	p.setPrecoProduto(new BigDecimal(precoProduto));
 		
 
 		response.sendRedirect("produto/novoProdutoCadastrado.jsp");

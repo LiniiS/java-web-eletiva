@@ -45,14 +45,18 @@ public class NovoCarro extends HttpServlet {
 		c.setPortasCarro(portasCarro);
 		c.setVelocidadeVeiculo(Integer.parseInt(velocidadeCarro));		
 		
-		//System.out.println(c.getMarcaVeiculo());
 		
-		CarroDao lst = new CarroDao();
-		lst.adiciona(c);
+		CarroDao carDao = new CarroDao();
+		try {
+			carDao.newCarro(c);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-
+		//não tá usando o redirect
+		
 		RequestDispatcher rd = request.getRequestDispatcher("frota/carro/novoCarroCadastrado.jsp");
-		request.setAttribute("marcaCarro", c.getMarcaVeiculo());
+	//	request.setAttribute("marcaCarro", c.getMarcaVeiculo());
 		rd.forward(request, response);
 	}
 

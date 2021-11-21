@@ -74,6 +74,7 @@
 							<th scope="col">#</th>
 							<th scope="col">Código</th>
 							<th scope="col">Produto</th>
+							<th scope="col">Preço</th>
 							<th scope="col"></th>
 						</tr>
 					</thead>
@@ -83,6 +84,7 @@
 								<th scope="row">${produto.id}</th>
 								<td>${produto.codigoProduto}</td>
 								<td>${produto.nomeProduto}</td>
+								<td>R$ ${produto.precoProduto}</td>
 								<td class="text-center">
 									<div class="btn-group btn-group-sm" role="group"
 										aria-label="botões em grupo">

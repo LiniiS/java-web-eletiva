@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.asantos.gerenciador.dao.ClienteDao;
+import br.com.asantos.gerenciador.vo.Cliente;
 
 /**
  * Servlet implementation class RemoveCliente
  * representa a requisição de delete do item cadastrado
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/removeCliente")
 public class RemoveCliente extends HttpServlet {
@@ -28,8 +29,15 @@ public class RemoveCliente extends HttpServlet {
 		String clientId = request.getParameter("id");
 		Integer id = Integer.valueOf(clientId);
 		
-		ClienteDao clientes = new ClienteDao();
-		clientes.removeCliente(id);
+		ClienteDao clienteDao = new ClienteDao();
+		Cliente cliente = new Cliente();
+		cliente.setId(id);
+		
+		try {
+			clienteDao.deleteCliente(cliente);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	
 		response.sendRedirect("listaClientes");
 	}

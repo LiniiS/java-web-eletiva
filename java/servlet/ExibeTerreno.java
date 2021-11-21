@@ -31,10 +31,17 @@ public class ExibeTerreno extends HttpServlet {
 		
 		Integer id = Integer.valueOf(request.getParameter("id"));
 		
-		TerrenoDao terrenos = new TerrenoDao();
-		
+		TerrenoDao trnDao = new TerrenoDao();
 
-		Terreno terreno = terrenos.buscaTerrenoPorId(id);
+		Terreno terreno = new Terreno();
+		
+		//tenta buscar o terreno selecionado pra exibir
+		//se achar, adiciona os dados ao objeto terreno e exibe na jsp do formulario de edição
+		try {
+			terreno = trnDao.findByIdTerreno(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		request.setAttribute("terreno", terreno);
 		

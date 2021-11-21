@@ -31,11 +31,17 @@ public class ExibeCarro extends HttpServlet {
 		String carroId = request.getParameter("id");
 		Integer id = Integer.valueOf(carroId);
 		
-		//solicita o bd (simulado pela classe DAO)
+		//solicita ao bd  
 		CarroDao carroDao = new CarroDao();
-		
-		//opera como a interface do CrudRepository/findById
-		Carro carro = carroDao.buscaCarroPorId(id);
+		 
+		Carro carro = new Carro();
+		//tenta buscar o carro pelo id passado na requisção e popula o objeto carro com os dados
+		//para manipulação/edição
+		try {
+			carro = carroDao.findByIdCarro(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//para pra requisição q será despachada pro front os atributos do objeto a ser exibido pra alteração
 		request.setAttribute("carro", carro);

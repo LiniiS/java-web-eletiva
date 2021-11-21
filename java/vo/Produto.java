@@ -1,5 +1,7 @@
 package br.com.asantos.gerenciador.vo;
 
+import java.math.BigDecimal;
+
 /**
  * Classe que representa o Produto para cadastro simplificado
  * com base no cenário fornecido em aula
@@ -13,6 +15,7 @@ public class Produto {
 	//código interno do sistema do cliente
 	private String codigoProduto; //id
 	private String nomeProduto;
+	private BigDecimal precoProduto;
 	
 	
 	public Produto() {
@@ -42,6 +45,16 @@ public class Produto {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+
+	public BigDecimal getPrecoProduto() {
+		return precoProduto;
+	}
+
+
+	public void setPrecoProduto(BigDecimal precoProduto) {
+		this.precoProduto = precoProduto;
 	}
 	
 

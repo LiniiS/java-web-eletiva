@@ -19,6 +19,7 @@ public class Carro extends Veiculo{
 	public void setPortasCarro(String portasCarro) {
 		this.portasCarro = portasCarro;
 	}
+
 	public boolean isArCarro() {
 		return arCarro;
 	}

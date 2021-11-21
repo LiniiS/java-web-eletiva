@@ -9,12 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.asantos.gerenciador.dao.ProdutoDao;
+import br.com.asantos.gerenciador.vo.Produto;
 
 /**
  * Servlet implementation class RemoveProduto
  * representa a requisição de delete do item cadastrado
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/removeProduto")
 public class RemoveProduto extends HttpServlet {
@@ -30,8 +31,15 @@ public class RemoveProduto extends HttpServlet {
 		String prdId = request.getParameter("id");
 		Integer id = Integer.valueOf(prdId);
 		
-		ProdutoDao produtos = new ProdutoDao();
-		produtos.removeProduto(id);
+		Produto produto = new Produto();
+		produto.setId(id);
+		
+		ProdutoDao produtoDao = new ProdutoDao();
+		try {
+			produtoDao.deleteProduto(produto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	
 		response.sendRedirect("listaProdutos");
 		

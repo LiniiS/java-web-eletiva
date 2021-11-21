@@ -47,8 +47,8 @@
 							concluído <span class="sr-only">(current)</span>
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="/gerenciador/formCadastroCarros.html">Cadastrar novo
-							Carro</a></li>
+						href="/gerenciador/frota/carro/formCadastroCarros.html">Cadastrar
+							novo Carro</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="/gerenciador/listaCarros">Lista de Carros</a></li>
 				</ul>
@@ -57,15 +57,29 @@
 	</header>
 
 	<main class="container-fluid pt-3">
-		<section class="container m-auto" id="carro-cadastrado">
 
-			<div class="alert alert-dark" role="alert">
-				<h4 class="alert-heading">Well done!</h4>
-				<p>
-					Carro <strong> ${marcaCarro} </strong> cadastrado com sucesso!
-				</p>
-				<hr>
-				<p class="mb-0">Dados do carro são e salvos!</p>
+		<section class="container m-auto p-5" id="carro-cadastrado">
+
+			<div class="card mb-3 alert alert-dark" style="max-width: 540px;">
+				<div class="row no-gutters">
+					<div class="col-md-4">
+						<img src="./img/img-cadastro-ok.png" class="img-thumbnail border"
+							alt="Mulher fazendo sinal de OK com os dedos, arte desenhada.">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">Cadastro concluído com sucesso</h5>
+							<p class="card-text">Todos os dados foram gravados.</p>
+							<p class="card-text">
+								<small class="text-muted">Dados do carro são e salvos!</small>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<a href="/gerenciador/listaCarros"
+					class="col-sm-2 col-md-4 btn btn-cor-especial">Voltar</a>
 			</div>
 
 		</section>

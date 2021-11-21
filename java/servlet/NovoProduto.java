@@ -1,6 +1,7 @@
 package br.com.asantos.gerenciador.servlet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,7 @@ import br.com.asantos.gerenciador.vo.Produto;
  * Servlet implementation class NovoProduto
  * apresenta o formulario para cadastro
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/produtos")
 public class NovoProduto extends HttpServlet {
@@ -32,15 +33,24 @@ public class NovoProduto extends HttpServlet {
 		//leitura
 		String nomeProduto = req.getParameter("produto");
 		String codigoProduto = req.getParameter("codigo");
+		String precoProduto = req.getParameter("preco");
+		
+		
 		
 		//população
-		Produto p = new Produto();
-		p.setNomeProduto(nomeProduto);
-		p.setCodigoProduto(codigoProduto);
+		Produto prd = new Produto();
+		prd.setNomeProduto(nomeProduto);
+		prd.setCodigoProduto(codigoProduto);
+		prd.setPrecoProduto(new BigDecimal(precoProduto));
 		
 		//"armazena no banco"
-		ProdutoDao lst = new ProdutoDao();
-		lst.adiciona(p);
+		ProdutoDao prdDao = new ProdutoDao();
+		
+		try {
+			prdDao.newProduto(prd);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//redireciona pra evitar o reenvio de requisição duplicando o cadastro
 //		RequestDispatcher rd = req.getRequestDispatcher("/novoProdutoCadastrado.jsp");

@@ -1,7 +1,6 @@
 package br.com.asantos.gerenciador.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,36 +10,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.asantos.gerenciador.dao.MotoDao;
-import br.com.asantos.gerenciador.vo.Moto;
 
 /**
- * Servlet implementation class ListaMotos
- * apresenta a lista de itens cadastrados e
- * campo de busca
+ * Servlet implementation class ListaMotos apresenta a lista de itens
+ * cadastrados e campo de busca
+ * 
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/listaMotos")
 public class ListaMotos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		MotoDao motoDao = new MotoDao();
-		List<Moto> lista = motoDao.getMotos();
-		
+
 		String campoPesquisa = request.getParameter("pesquisa");
-		if(campoPesquisa =="" || campoPesquisa== null) {
-			request.setAttribute("motos", lista);
-			
-		}else {
-			request.setAttribute("motos", motoDao.buscaMoto(campoPesquisa));
+
+		try {
+			if (campoPesquisa == "" || campoPesquisa == null) {
+				request.setAttribute("motos", motoDao.getMotos());
+
+			} else {
+				request.setAttribute("motos", motoDao.findMotos(campoPesquisa));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("frota/moto/index.jsp");
 		rd.forward(request, response);
 

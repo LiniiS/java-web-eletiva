@@ -107,11 +107,12 @@
 								pattern="([0-9]{2,3})?([0-9]{2})([0-9]{4,5})([0-9]{4})">
 							<div class="invalid-feedback">Informe o telefone</div>
 						</div>
+						
 						<div class="form-group col-md-4">
 							<!-- verificar  a conversão/correção da dt no modelo/banco -->
 							<label for="dtNascimento">Data Nascimento</label> <input
 								type="date" class="form-control" id="dtNascimento"
-								data-tipo="dtNascimento" name="dtNascimento" required>
+								data-tipo="dtNascimento" value="${cliente.dtNascimento}"name="dtNascimento" readonly>
 
 							<div class="invalid-feedback">
 								Informe data de nascimento<small> (+18 anos)</small>

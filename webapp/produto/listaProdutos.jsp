@@ -62,6 +62,7 @@
 						<th scope="col">#</th>
 						<th scope="col">Produto</th>
 						<th scope="col">Codigo</th>
+						<th scope="col">Preço</th>
 						<th scope="col"></th>
 
 					</tr>
@@ -72,6 +73,7 @@
 							<th scope="row">${produto.id}</th>
 							<td>${ produto.nomeProduto }</td>
 							<td>${ produto.codigoProduto }</td>
+							<td>${ produto.precoProduto }</td>
 							<td>
 								<div class="btn-group btn-group-sm" role="group" aria-label="botões em grpo">
 									<button type="button" class="btn btn-cor-especial">Editar</button>
@@ -109,5 +111,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
 	integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
 	crossorigin="anonymous"></script>
+<script type="module" src="../js/app.js"></script>
 
 </html>

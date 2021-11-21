@@ -189,7 +189,7 @@
 	integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
 	crossorigin="anonymous"></script>
 
-<!--validaÃ§Ã£o client-side -->
+<!--validaçãoo client-side -->
 <script>
 	// Example starter JavaScript for disabling form submissions if there are invalid fields
 	(function() {

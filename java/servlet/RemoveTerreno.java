@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.asantos.gerenciador.dao.TerrenoDao;
+import br.com.asantos.gerenciador.vo.Terreno;
 
 /**
  * Servlet implementation class RemoveTerreno
  * representa a requisição de delete do item cadastrado
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/removeTerreno")
 public class RemoveTerreno extends HttpServlet {
@@ -27,8 +28,17 @@ public class RemoveTerreno extends HttpServlet {
 		String terrenoId = request.getParameter("id");
 		Integer id = Integer.valueOf(terrenoId);
 		
-		TerrenoDao terrenos = new TerrenoDao();
-		terrenos.removeTerreno(id);
+		Terreno t = new Terreno();
+		t.setId(id);
+		TerrenoDao terrenoDao = new TerrenoDao();
+
+		try {
+			terrenoDao.deleteTerreno(t);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		response.sendRedirect("listaTerrenos");
 	

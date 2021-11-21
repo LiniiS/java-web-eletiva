@@ -15,7 +15,7 @@ import br.com.asantos.gerenciador.vo.Cliente;
  * Servlet implementation class NovoCliente
  * apresenta o formulario para cadastro
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/clientes")
 public class NovoCliente extends HttpServlet{
@@ -56,14 +56,8 @@ public class NovoCliente extends HttpServlet{
 //		}
 			
 		Cliente c = new Cliente();
-		
-		//gerar um id aleatório por enquanto -> esse id deve vir do banco de dados, mas aqui tá 
-		//provisoriamente na gambiarra
-		//substituido pela chave sequencial (id) na classe ClienteDao
-		//Random random = new Random();
 	
 		//população
-		//c.setId(random.nextInt(10));
 		c.setNome(nome);
 		c.setSobrenome(sobrenome);
 		c.setEmail(email);
@@ -75,12 +69,13 @@ public class NovoCliente extends HttpServlet{
 		c.setCidade(cidade);
 		c.setEstado(estado);
 		c.setCEP(cep);
-				
-		System.out.println(c.getNome());
 		
-		ClienteDao lst = new ClienteDao();
-		lst.adiciona(c);
-		
+		ClienteDao cliDao = new ClienteDao();
+		try {
+			cliDao.newCliente(c);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		/**
 		 * para evitar o redirecionamento server-side e a duplicação de reenvio de dados na hr do cadastro

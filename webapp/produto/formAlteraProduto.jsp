@@ -72,9 +72,9 @@
 					<div class="form-row">
 						<div class="form-group col-md-2 mt-2">
 							<label class="badge badge-secondary text-wrap text-monospace"
-								style="width: 6rem;" for="codigo">Produto id:
+								style="width: 6rem;" for="cod">Produto id:
 								${produto.id}</label> <input type="text" class="form-control"
-								id="codigo" value="${produto.id}" name="id" hidden>
+								id="cod" value="${produto.id}" name="cod" hidden>
 						</div>
 					</div>
 					<div class="form-row">
@@ -85,13 +85,19 @@
 							<div class="invalid-feedback">Informe o nome do produto</div>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="sobrenome">Código do Produto</label> <input
+							<label for="codigo">Código do Produto</label> <input
 								type="text" class="form-control" id="codigo" name="codigo"
 								pattern="([A-Z]{3}[\d]{4})" value="${produto.codigoProduto}"
 								required>
 							<div class="invalid-feedback">
 								Informe um código <small>(exemplo: ABC1234)</small>
 							</div>
+						</div>
+						<div class="form-group col-md-4">
+							<label for="preco">Preço</label> <input type="text"
+								class="form-control" id="preco" data-tipo="preco"
+								name="preco" value="${produto.precoProduto}" required>
+							<div class="invalid-feedback">Informe o preço do produto</div>
 						</div>
 					</div>
 					<div class="btn-group" role="group" aria-label="grupo-botoes">
@@ -147,7 +153,10 @@
 		}, false);
 	})();
 </script>
-<script type="module" src="js/app.js"></script>
+<!-- simple mask money: mascara pra testar o uso de máscaras -->
+<script src="https://github.com/codermarcos/simple-mask-money/releases/download/v3.0.0/simple-mask-money.js"></script>
+<script type="module" src="../js/app.js"></script>
+
 
 </html>
 

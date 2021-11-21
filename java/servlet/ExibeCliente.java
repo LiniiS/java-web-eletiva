@@ -16,7 +16,7 @@ import br.com.asantos.gerenciador.vo.Cliente;
  * Servlet implementation class ExibeCliente
  * apresenta os dados para edição
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/exibeCliente")
 public class ExibeCliente extends HttpServlet {
@@ -33,9 +33,12 @@ public class ExibeCliente extends HttpServlet {
 
 		ClienteDao clienteDao = new ClienteDao();
 		
-		//simular o findById
-		Cliente cliente = clienteDao.buscaClientePorId(id);
-		System.out.println(cliente.getNome());
+		Cliente cliente = new Cliente();
+		try {
+			cliente = clienteDao.findByIdCliente(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//bota na requisição que será despachada os dados do  ${cliente.id}
 		request.setAttribute("cliente", cliente);

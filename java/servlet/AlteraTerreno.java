@@ -38,15 +38,28 @@ public class AlteraTerreno extends HttpServlet {
 		String terrenoId = request.getParameter("id");
 		Integer id =Integer.valueOf(terrenoId);
 		
+		Terreno t = new Terreno();
 		TerrenoDao terrenoDao = new TerrenoDao();
-		Terreno t = terrenoDao.buscaTerrenoPorId(id);
+		try {
+			//tenta buscar esse terreno q vem da requisição
+			t = terrenoDao.findByIdTerreno(id);
+			
+			//tenta setar os dados:
+			t.setLatitude(latitude);
+			t.setLongitude(longitude);
+			t.setAlturaMax(alturaMax);
+			t.setAlturaMin(alturaMin);
+			t.setCotasTerreno(Integer.parseInt(cotasTerreno));
+			t.setQtdeTerreno(Integer.parseInt(qtdeTerreno));
+			
+			//chama o edit que executa a query de update no bd
+			terrenoDao.editTerreno(t);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		t.setLatitude(latitude);
-		t.setLongitude(longitude);
-		t.setAlturaMax(alturaMax);
-		t.setAlturaMin(alturaMin);
-		t.setCotasTerreno(Integer.parseInt(cotasTerreno));
-		t.setQtdeTerreno(Integer.parseInt(qtdeTerreno));
 
 		response.sendRedirect("terreno/novoTerrenoCadastrado.jsp");
 		

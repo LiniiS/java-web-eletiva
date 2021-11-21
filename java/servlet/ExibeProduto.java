@@ -16,7 +16,7 @@ import br.com.asantos.gerenciador.vo.Produto;
  * Servlet implementation class ExibeProduto
  * apresenta os dados para edição
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/exibeProduto")
 public class ExibeProduto extends HttpServlet {
@@ -30,13 +30,20 @@ public class ExibeProduto extends HttpServlet {
 		Integer id = Integer.valueOf(prdId);
 
 		ProdutoDao produtoDao = new ProdutoDao();
+		Produto produto = new Produto();
+		try {
+			produto = produtoDao.findByIdProduto(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		//simular o findById
-		Produto produto = produtoDao.buscaProdutoPorId(id);
-	//	System.out.println(produto.getNome());
-		
+		//	Produto produto = produtoDao.buscaProdutoPorId(id);
+		//	System.out.println(produto.getNome());
+			
 		//bota na requisição que será despachada os dados do  ${cliente.id}
-		request.setAttribute("produto", produto);
+	    request.setAttribute("produto", produto);
 		
 		//chama a jsp que traz os dados daquele id
 		RequestDispatcher rd = request.getRequestDispatcher("/produto/formAlteraProduto.jsp");

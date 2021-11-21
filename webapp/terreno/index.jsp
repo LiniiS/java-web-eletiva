@@ -62,7 +62,7 @@
 					<form action="listaTerrenos" method="POST" class="form-inline"
 						id="pesquisa-terreno">
 						<input class="form-control mr-sm-2" type="search" name="pesquisa"
-							placeholder="Pesquisa" aria-label="Search">
+							placeholder="Pesquisa por cotas" aria-label="Search">
 						<button class="btn btn-cor-especial my-2 my-sm-0" type="submit">Pesquisar</button>
 					</form>
 				</nav>

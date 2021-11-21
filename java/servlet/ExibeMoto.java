@@ -13,10 +13,10 @@ import br.com.asantos.gerenciador.dao.MotoDao;
 import br.com.asantos.gerenciador.vo.Moto;
 
 /**
- * Servlet implementation class ExibeMoto
- * apresenta os dados para edição
+ * Servlet implementation class ExibeMoto apresenta os dados para edição
+ * 
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/exibeMoto")
 public class ExibeMoto extends HttpServlet {
@@ -33,8 +33,12 @@ public class ExibeMoto extends HttpServlet {
 		Integer id = Integer.valueOf(motoId);
 
 		MotoDao motoDao = new MotoDao();
-
-		Moto moto = motoDao.buscaMotoPorId(id);
+		Moto moto = new Moto();
+		try {
+			moto = motoDao.findByIdMoto(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		request.setAttribute("moto", moto);
 

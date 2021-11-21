@@ -71,7 +71,7 @@
 							<th scope="row"> </th>
 							<td> ${ terreno.longitude }</td>
 							<td> ${ terreno.latitude }</td>
-							<td> ${ terreno.cotasTerreno } km/h</td>
+							<td> ${ terreno.cotasTerreno } unidades</td>
 						</tr>
 				</c:forEach>
 				</tbody>

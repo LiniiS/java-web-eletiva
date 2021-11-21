@@ -1,7 +1,6 @@
 package br.com.asantos.gerenciador.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,14 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.asantos.gerenciador.dao.CarroDao;
-import br.com.asantos.gerenciador.vo.Carro;
 
 /**
  * Servlet implementation class ListaCarros
  * apresenta a lista de itens cadastrados e
  * campo de busca
  * @author Aline S
- * @version 0.1
+ * @version 0.2
  */
 @WebServlet("/listaCarros")
 public class ListaCarros extends HttpServlet {
@@ -32,16 +30,21 @@ public class ListaCarros extends HttpServlet {
 			throws ServletException, IOException {
 
 		CarroDao carroDao = new CarroDao();
-
-		List<Carro> lista = carroDao.getCarros();
-
 		String campoPesquisa = request.getParameter("pesquisa");
-
-		if (campoPesquisa == "" || campoPesquisa == null) {
-			request.setAttribute("carros", lista);
-		} else {
-			request.setAttribute("carros", carroDao.buscaCarro(campoPesquisa));
+		
+		try {
+			if (campoPesquisa == "" || campoPesquisa == null) {
+				request.setAttribute("carros", carroDao.getCarros());
+			} else {
+				request.setAttribute("carros", carroDao.findCarros(campoPesquisa));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		
+		
 
 		RequestDispatcher rd = request.getRequestDispatcher("frota/carro/index.jsp");
 		rd.forward(request, response);

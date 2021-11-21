@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.asantos.gerenciador.dao.CarroDao;
+import br.com.asantos.gerenciador.vo.Carro;
 
 /**
  * Servlet implementation class RemoveCarro
@@ -29,7 +30,14 @@ public class RemoveCarro extends HttpServlet {
 		Integer id = Integer.valueOf(carroId);
 		
 		CarroDao carroDao = new CarroDao();
-		carroDao.removeCarro(id);
+		Carro carro = new Carro();
+		carro.setId(id);
+		try {
+			carroDao.deleteCarro(carro);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		
 		response.sendRedirect("listaCarros");
 

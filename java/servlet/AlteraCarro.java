@@ -39,15 +39,24 @@ public class AlteraCarro extends HttpServlet {
 		String arCarro = request.getParameter("arCarro");
 
 		CarroDao carroDao = new CarroDao();
+		Carro c = new Carro();
 
-		Carro c = carroDao.buscaCarroPorId(id);
-
-		c.setArCarro(Boolean.parseBoolean(arCarro));
-		c.setMarcaVeiculo(marcaCarro);
-		c.setMarchaVeiculo(Integer.parseInt(marchaCarro));
-		c.setPlacaVeiculo(placaCarro);
-		c.setPortasCarro(portasCarro);
-		c.setVelocidadeVeiculo(Integer.parseInt(velocidadeCarro));
+		try {
+			c = carroDao.findByIdCarro(id);
+			//popula o formulario com esses dados do BD
+			c.setArCarro(Boolean.parseBoolean(arCarro));
+			c.setMarcaVeiculo(marcaCarro);
+			c.setMarchaVeiculo(Integer.parseInt(marchaCarro));
+			c.setPlacaVeiculo(placaCarro);
+			c.setPortasCarro(portasCarro);
+			c.setVelocidadeVeiculo(Integer.parseInt(velocidadeCarro));
+			//chama a query q faz o update cm os dados
+			carroDao.editCarro(c);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		response.sendRedirect("frota/carro/editarCarroSucesso.jsp");
 
